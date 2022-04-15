@@ -9,7 +9,7 @@ spring:
   jpa:
     hibernate:
 #      ddl-auto: create  # application 실행 시점 내가 가진 테이블(엔티티)을 다 지우고 다시 생성
-      ddl-auto: none
+      ddl-auto: create
     properties:
       hibernate:
 #        show_sql: true # system.out.println() 으로 로그를 찍기 때문에 쓰지 말 것
@@ -18,6 +18,6 @@ spring:
 logging:
   level:
     org.hibernate.SQL: debug
-    org.hibernate.type: trace
+#    org.hibernate.type: trace
     
 
