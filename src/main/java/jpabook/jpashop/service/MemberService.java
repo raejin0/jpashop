@@ -43,16 +43,4 @@ public class MemberService {
 		return memberRepository.findOne(id);
 	}
 
-
-	/**
-	 * return 으로 member를 넘길 경우
-	 * command와 query가 같이 있는 꼴이 된다. -> return 시 Member를 다시 조회하는 꼴이 된다.
-	 * command와 query를 철저히 분리하자!! -> 유지보수성 증대
-	 *
-	 */
-	@Transactional
-	public void update(Long id, String name) {
-		Member member = memberRepository.findOne(id);
-		member.setName(name);
-	}
 }

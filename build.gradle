@@ -24,11 +24,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-devtools'
 
-    /*스프링 부트가 해당 프로젝트에 최적화된 버전을 가져온다.
-    안될 경우 버전 기입*/
-    //implementation 'com.fasterxml.jackson.datatype:jackson-datatype-hibernate5:2.13.2'
-    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-hibernate5'
-
     implementation("com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.8.0")
 
     compileOnly 'org.projectlombok:lombok'
