@@ -29,8 +29,8 @@ public class InitDB {
 	public void init() {
 
 		/*
-		* because of spring life cycle, @Transactional doesn't work in this @PostConstruct method
-		* That's why dbInit1() is called here.
+		* @Transactional doesn’t work in @PostConstruct due to spring life cycle.
+		*
 		**/
 		initService.dbInit1();
 		initService.dbInit2();

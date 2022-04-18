@@ -8,12 +8,14 @@ spring:
 
   jpa:
     hibernate:
-#      ddl-auto: create  # application 실행 시점 내가 가진 테이블(엔티티)을 다 지우고 다시 생성
       ddl-auto: create
+#      ddl-auto: create  # application 실행 시점 내가 가진 테이블(엔티티)을 다 지우고 다시 생성
     properties:
       hibernate:
-#        show_sql: true # system.out.println() 으로 로그를 찍기 때문에 쓰지 말 것
         format_sql: true
+        default_batch_fetch_size: 100 # in query의 갯수
+#        show_sql: true # system.out.println() 으로 로그를 찍기 때문에 쓰지 말 것
+    open-in-view: false
 
 logging:
   level:

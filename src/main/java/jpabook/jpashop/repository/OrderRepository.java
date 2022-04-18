@@ -110,8 +110,47 @@ public class OrderRepository {
 						" join fetch o.member m" +
 						" join fetch o.delivery d", Order.class
 		).getResultList();
-
 	}
 
+	public List<Order> findAllWithItem() {
 
+		/*
+		* jpql의 distinct 기능 2 가지
+		* 1. sql로 distinct를 날림 -> 데이터가 달라 실제로는 걸러지지 않을 수 있음
+		* 2. 엔티티 distinct -> 실질적으로 여기서 걸러짐
+		* */
+
+		/* 주의!!
+		*  페이징 불가
+		* 쿼리에서 distinct로 걸러지지 않기 때문에 페이징이 안된다.
+		* WARN : HHH000104: firstResult/maxResults specified with collection fetch; applying in memory!
+		* */
+		return em.createQuery(
+				"select distinct o from Order o " +
+						" join fetch o.member m " +
+						" join fetch o.delivery d " +
+						" join fetch o.orderItems oi " +
+						" join fetch oi.item i", Order.class)
+				.setFirstResult(1)
+				.setMaxResults(100)
+				.getResultList();
+	}
+
+	public List<Order> findAllWithMemberDelivery(int offset, int limit) {
+		/* << Recommended >>
+		* xToOne 관계만 fetch join 적용 */
+		String query1 = "select o from Order o " +
+				" join fetch o.member m" +
+				" join fetch o.delivery d";
+
+		/* 생략해도 가능 ( Lazy join으로 가져옴 )
+		* 네트워크를 더 많이 탐 */
+		String query2 = "select o from Order o ";
+
+		return em.createQuery(
+				query1, Order.class)
+				.setFirstResult(offset)
+				.setMaxResults(limit)
+				.getResultList();
+	}
 }
